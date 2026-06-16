@@ -123,7 +123,26 @@ section{
     grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
     gap:20px;
 }
+.skills-section{
+    background:linear-gradient(
+        135deg,
+        #0f172a,
+        #1e293b,
+        #334155,
+        #0f172a
+    );
 
+    background-size:300% 300%;
+    animation:gradientMove 12s ease infinite;
+
+    border-radius:25px;
+    margin:40px 0;
+    padding:80px 40px;
+}
+
+.skills-section .section-title{
+    color:white;
+}
 .skill{
     background:white;
     padding:20px;
@@ -305,7 +324,7 @@ footer{
 
 </section>
 
-<section id="skills">
+<section id="skills" class="skills-section">
 
     <h2 class="section-title">Technical Skills</h2>
 
