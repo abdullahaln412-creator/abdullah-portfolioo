@@ -126,7 +126,53 @@ section{
     border-radius:12px;
     box-shadow:0 2px 10px rgba(0,0,0,0.1);
 }
+.contact{
+    max-width:700px;
+    margin:auto;
+    padding:40px;
+    border-radius:20px;
+    background:linear-gradient(
+        135deg,
+        #ff6b6b,
+        #feca57,
+        #48dbfb,
+        #1dd1a1,
+        #5f27cd
+    );
+    background-size:300% 300%;
+    animation:gradientMove 8s ease infinite;
+    color:white;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    transition:all 0.4s ease;
+}
 
+.contact:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 20px 40px rgba(0,0,0,0.3);
+}
+
+.contact a{
+    color:white;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+.contact a:hover{
+    color:#ffeaa7;
+}
+
+@keyframes gradientMove{
+    0%{
+        background-position:0% 50%;
+    }
+    50%{
+        background-position:100% 50%;
+    }
+    100%{
+        background-position:0% 50%;
+    }
+}
 .card{
     background:white;
     padding:25px;
