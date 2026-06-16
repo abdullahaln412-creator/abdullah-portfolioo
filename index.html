@@ -97,6 +97,26 @@ nav a{
     border-radius:8px;
     margin-right:10px;
     margin-top:15px;
+
+    transition:all 0.3s ease;
+    animation:pulse 2s infinite;
+}
+    .btn:hover{
+    transform:translateY(-6px) scale(1.1);
+    box-shadow:0 15px 35px rgba(37,99,235,0.5);
+}
+    @keyframes pulse{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.05);
+    }
+
+    100%{
+        transform:scale(1);
+    }
 }
 
 section{
@@ -316,7 +336,7 @@ footer{
 <body>
 
 <nav>
-    <h2>Abdullah</h2>
+    <a href="index.html" class="logo">Abdullah</a>
 
     <ul>
         <li><a href="#about">About</a></li>
