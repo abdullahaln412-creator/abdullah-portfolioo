@@ -1,21 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abdullah Al Noman | Civil Engineering Portfolio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f8fafc;
+    color:#333;
+}
+
+nav{
+    background:#0f172a;
+    padding:15px 10%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+nav h2{
+    color:white;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:50px 10%;
+    gap:50px;
+    flex-wrap:wrap;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+}
+
+.hero img{
+    width:320px;
+    height:320px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid white;
+}
+
+.hero-text{
+    max-width:600px;
+}
+
+.hero-text h1{
+    font-size:3rem;
+    margin-bottom:10px;
+}
+
+.hero-text h3{
+    color:#94a3b8;
+    margin-bottom:20px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 24px;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+    margin-right:10px;
+    margin-top:15px;
+}
+
+section{
+    padding:80px 10%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:40px;
+    font-size:2rem;
+    color:#0f172a;
+}
+
+.about,
+.education,
+.experience{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+    line-height:1.8;
+}
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+}
+
+.skill{
+    background:white;
+    padding:20px;
+    text-align:center;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+}
+
+.contact{
+    text-align:center;
+}
+
+.contact a{
+    color:#2563eb;
+    text-decoration:none;
+}
+
+footer{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+@media(max-width:768px){
+
+.hero{
+    text-align:center;
+}
+
+.hero-text h1{
+    font-size:2.2rem;
+}
+
+.hero img{
+    width:250px;
+    height:250px;
+}
+}
+</style>
+
+</head>
+<body>
+
+<nav>
+    <h2>Abdullah</h2>
+
+    <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
 <section class="hero">
-    <div class="hero-content">
-        <div class="text">
-            <h1>ABDULLAH AL NOMAN</h1>
-            <h2>Civil Engineering Student</h2>
-            <p>
-                Passionate about structural engineering,
-                infrastructure development, and innovative construction solutions.
-            </p>
 
-            <a href="#contact" class="btn">Contact Me</a>
-            <a href="https://www.linkedin.com/in/abdullah-noman78/" class="btn secondary">
-                LinkedIn
-            </a>
-        </div>
+    <div class="hero-text">
+        <h1>ABDULLAH AL NOMAN</h1>
 
-        <div class="image">
-            <img src="profile.jpg" alt="Abdullah Al Noman">
-        </div>
+        <h3>Civil Engineering Student</h3>
+
+        <p>
+            Passionate about structural engineering,
+            infrastructure development and modern
+            construction technologies.
+        </p>
+
+        <a class="btn" href="#contact">Contact Me</a>
+
+        <a class="btn"
+        href="https://www.linkedin.com/in/abdullah-noman78/"
+        target="_blank">
+        LinkedIn
+        </a>
     </div>
+
+    <div>
+        <img src="profile.jpg" alt="Abdullah Al Noman">
+    </div>
+
 </section>
+
+<section id="about">
+
+    <h2 class="section-title">About Me</h2>
+
+    <div class="about">
+
+        <p>
+            I am Abdullah Al Noman, a Civil Engineering
+            student at Southwest Petroleum University.
+            I am expected to graduate in June 2027.
+        </p>
+
+        <br>
+
+        <p>
+            I am interested in structural design,
+            engineering software, infrastructure projects,
+            and sustainable construction solutions.
+        </p>
+
+    </div>
+
+</section>
+
+<section id="skills">
+
+    <h2 class="section-title">Technical Skills</h2>
+
+    <div class="skills-grid">
+
+        <div class="skill">AutoCAD</div>
+        <div class="skill">Revit</div>
+        <div class="skill">SAP2000</div>
+        <div class="skill">ETABS</div>
+        <div class="skill">Adobe Photoshop</div>
+        <div class="skill">Microsoft Office</div>
+
+    </div>
+
+</section>
+
+<section id="education">
+
+    <h2 class="section-title">Education</h2>
+
+    <div class="card">
+
+        <h3>Southwest Petroleum University</h3>
+
+        <p>Bachelor of Civil Engineering</p>
+
+        <p>Expected Graduation: June 2027</p>
+
+    </div>
+
+</section>
+
+<section id="experience">
+
+    <h2 class="section-title">Professional Experience</h2>
+
+    <div class="card">
+
+        <h3>TikTok Agency Manager / Agent</h3>
+
+        <p>
+            Managing creators, coordinating operations,
+            handling communication, and supporting
+            creator growth and performance.
+        </p>
+
+    </div>
+
+</section>
+
+<section>
+
+    <h2 class="section-title">Academic Projects</h2>
+
+    <div class="card">
+
+        <h3>Engineering Class Projects</h3>
+
+        <p>
+            Completed coursework involving engineering
+            drawings, structural calculations,
+            AutoCAD exercises and academic design assignments.
+        </p>
+
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact">
+
+        <p><strong>Name:</strong> Abdullah Al Noman</p>
+
+        <br>
+
+        <p>
+            <strong>LinkedIn:</strong><br>
+            <a href="https://www.linkedin.com/in/abdullah-noman78/" target="_blank">
+                linkedin.com/in/abdullah-noman78
+            </a>
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p>
+        © 2026 Abdullah Al Noman | Civil Engineering Portfolio
+    </p>
+
+</footer>
+
+</body>
+</html>
