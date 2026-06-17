@@ -395,20 +395,12 @@ nav ul{
     color:#bfc7d5;
     min-height:40px;
 
-    width:400px;
+     max-width:400px;
+    width:100%;
     display:inline-block;
     text-align:center;
-}
 
-#typing-text::after{
-    content:"|";
-    animation:blink 0.8s infinite;
-}
-
-@keyframes blink{
-    50%{
-        opacity:0;
-    }
+    transition: opacity 0.5s ease;
 }
 
 .hidden{
@@ -669,41 +661,25 @@ const texts = [
     "Future Master's Researcher"
 ];
 
-let textIndex = 0;
-let charIndex = 0;
-let deleting = false;
-
 const typingText = document.getElementById("typing-text");
 
-function type() {
+let textIndex = 0;
 
-    const current = texts[textIndex];
+function changeText() {
+    typingText.style.opacity = "0";
 
-    if (!deleting) {
-        typingText.textContent = current.substring(0, charIndex + 1);
-        charIndex++;
+    setTimeout(() => {
+        typingText.textContent = texts[textIndex];
+        typingText.style.opacity = "1";
 
-        if (charIndex === current.length) {
-            deleting = true;
-            setTimeout(type, 2000);
-            return;
-        }
-    } else {
-        typingText.textContent = current.substring(0, charIndex - 1);
-        charIndex--;
-
-        if (charIndex === 0) {
-            deleting = false;
-            textIndex = (textIndex + 1) % texts.length;
-        }
-    }
-
-    setTimeout(type, deleting ? 50 : 100);
+        textIndex = (textIndex + 1) % texts.length;
+    }, 500);
 }
 
-type();
+typingText.textContent = texts[0];
 
-</script>
+setInterval(changeText, 3000);
+
 </script>
     <a href="https://wa.me/8801780180088"
    class="whatsapp-btn"
