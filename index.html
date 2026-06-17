@@ -399,6 +399,27 @@ nav ul{
     transform:translateY(-10px);
 }
 }
+    .whatsapp-btn{
+    position:fixed;
+    bottom:20px;
+    left:20px;
+    width:55px;
+    height:55px;
+    background:#25D366;
+    color:white;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    text-decoration:none;
+    z-index:999;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3);
+}
+
+.whatsapp-btn:hover{
+    transform:scale(1.1);
+}
 </style>
 
 </head>
@@ -605,5 +626,10 @@ const hiddenElements = document.querySelectorAll('.hidden');
 
 hiddenElements.forEach((el) => observer.observe(el));
 </script>
+    <a href="https://wa.me/8801780180088"
+   class="whatsapp-btn"
+   target="_blank">
+   💬
+</a>
 </body>
 </html>
