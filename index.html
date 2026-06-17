@@ -129,6 +129,9 @@ section{
     font-size:2rem;
     color:#0f172a;
 }
+    .skills-section .section-title{
+    color:#0f172a !important;
+}
 
 .about,
 .education,
@@ -367,17 +370,18 @@ nav ul{
 .social-icons a{
     font-size:45px;
 }
-}
-}
-    .hidden{
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s ease-out;
+.hidden{
+    opacity:0;
+    transform:translateY(120px) scale(0.8);
+    filter:blur(10px);
+    transition:all 1.5s ease;
 }
 
 .show{
-    opacity: 1;
-    transform: translateY(0);
+    opacity:1;
+    transform:translateY(0) scale(1);
+    filter:blur(0);
+}
 }
 </style>
 
