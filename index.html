@@ -468,25 +468,34 @@ nav ul{
 .menu-content{
     display:none;
     position:absolute;
-    background:white;
+    background:linear-gradient(135deg,#0a1931,#185adb);
     min-width:220px;
-    box-shadow:0 0 15px rgba(0,0,0,0.2);
-    border-radius:8px;
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+    opacity:0;
+    transform:translateY(-10px);
+    transition:all 0.3s ease;
 }
 
 .menu-container:hover .menu-content{
     display:block;
+    opacity:1;
+    transform:translateY(0);
 }
 
 .menu-content a{
     display:block;
     padding:12px;
     text-decoration:none;
-    color:#333;
+    color:white;
+    font-weight:600;
 }
 
 .menu-content a:hover{
-    background:#f0f0f0;
+    background:rgba(255,255,255,0.15);
+    padding-left:20px;
+    transition:0.3s;
 }
 
 .submenu{
@@ -498,13 +507,22 @@ nav ul{
     position:absolute;
     left:220px;
     top:0;
-    background:white;
-    min-width:180px;
-    box-shadow:0 0 15px rgba(0,0,0,0.2);
+
+    background:linear-gradient(135deg,#185adb,#0a1931);
+    min-width:220px;
+
+    border-radius:12px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+
+    opacity:0;
+    transform:translateX(-10px);
+    transition:all 0.3s ease;
 }
 
 .submenu:hover .submenu-content{
     display:block;
+    opacity:1;
+    transform:translateX(0);
 }
 </style>
 
