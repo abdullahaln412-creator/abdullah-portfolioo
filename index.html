@@ -389,6 +389,24 @@ nav ul{
 .social-icons a{
     font-size:45px;
 }
+
+/* Typing Animation */
+#typing-text{
+    color:#bfc7d5;
+    min-height:40px;
+}
+
+#typing-text::after{
+    content:"|";
+    animation:blink 0.8s infinite;
+}
+
+@keyframes blink{
+    50%{
+        opacity:0;
+    }
+}
+
 .hidden{
     opacity:0;
     transform:translateY(100px) scale(0.95);
@@ -454,7 +472,9 @@ nav ul{
     <div class="hero-text">
         <h1>ABDULLAH AL NOMAN</h1>
 
-        <h3>Civil Engineering Student</h3>
+        <h1>ABDULLAH AL NOMAN</h1>
+
+<h3 id="typing-text"></h3>
 
         <p>
             Passionate about structural engineering,
@@ -638,6 +658,50 @@ const observer = new IntersectionObserver((entries) => {
 const hiddenElements = document.querySelectorAll('.hidden');
 
 hiddenElements.forEach((el) => observer.observe(el));
+    hiddenElements.forEach((el) => observer.observe(el));
+
+const texts = [
+    "Civil Engineering Student",
+    "Structural Engineering Enthusiast",
+    "AutoCAD • Revit • ETABS",
+    "Future Master's Researcher"
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let deleting = false;
+
+const typingText = document.getElementById("typing-text");
+
+function type() {
+
+    const current = texts[textIndex];
+
+    if (!deleting) {
+        typingText.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === current.length) {
+            deleting = true;
+            setTimeout(type, 2000);
+            return;
+        }
+    } else {
+        typingText.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+            deleting = false;
+            textIndex = (textIndex + 1) % texts.length;
+        }
+    }
+
+    setTimeout(type, deleting ? 50 : 100);
+}
+
+type();
+
+</script>
 </script>
     <a href="https://wa.me/8801780180088"
    class="whatsapp-btn"
