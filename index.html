@@ -374,15 +374,22 @@ nav ul{
 }
 .hidden{
     opacity:0;
-    transform:translateY(120px) scale(0.8);
-    filter:blur(10px);
-    transition:all 1.5s ease;
+    transform:translateY(100px) scale(0.95);
+    filter:blur(5px);
+    transition:all 1.2s ease;
 }
 
 .show{
     opacity:1;
     transform:translateY(0) scale(1);
     filter:blur(0);
+}
+    .card{
+    transition:all 0.4s ease;
+}
+
+.card:hover{
+    transform:translateY(-10px);
 }
 }
 </style>
@@ -571,13 +578,20 @@ nav ul{
 <script>
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
+
         if(entry.isIntersecting){
             entry.target.classList.add('show');
+        } else {
+            entry.target.classList.remove('show');
         }
+
     });
+},{
+    threshold:0.2
 });
 
 const hiddenElements = document.querySelectorAll('.hidden');
+
 hiddenElements.forEach((el) => observer.observe(el));
 </script>
 </body>
