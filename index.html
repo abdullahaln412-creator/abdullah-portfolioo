@@ -446,10 +446,91 @@ nav ul{
 .whatsapp-btn:hover{
     transform:scale(1.15);
 }
+    .menu-container{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:1000;
+}
+
+.menu-btn{
+    background:#0a1931;
+    color:white;
+    border:none;
+    font-size:28px;
+    cursor:pointer;
+    padding:8px 12px;
+    border-radius:8px;
+}
+
+.menu-content{
+    display:none;
+    position:absolute;
+    background:white;
+    min-width:220px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+    border-radius:8px;
+}
+
+.menu-container:hover .menu-content{
+    display:block;
+}
+
+.menu-content a{
+    display:block;
+    padding:12px;
+    text-decoration:none;
+    color:#333;
+}
+
+.menu-content a:hover{
+    background:#f0f0f0;
+}
+
+.submenu{
+    position:relative;
+}
+
+.submenu-content{
+    display:none;
+    position:absolute;
+    left:220px;
+    top:0;
+    background:white;
+    min-width:180px;
+    box-shadow:0 0 15px rgba(0,0,0,0.2);
+}
+
+.submenu:hover .submenu-content{
+    display:block;
+}
 </style>
 
 </head>
 <body>
+    <div class="menu-container">
+
+    <button class="menu-btn">☰</button>
+
+    <div class="menu-content">
+
+        <div class="submenu">
+            <a href="#">Academic Resources ▸</a>
+
+            <div class="submenu-content">
+                <a href="semester1.html">Semester 1</a>
+                <a href="semester2.html">Semester 2</a>
+                <a href="semester3.html">Semester 3</a>
+                <a href="semester4.html">Semester 4</a>
+                <a href="semester5.html">Semester 5</a>
+                <a href="semester6.html">Semester 6</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 <nav>
     <a href="index.html" class="logo">ABDULLAH</a>
 
