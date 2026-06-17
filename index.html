@@ -477,13 +477,15 @@ nav ul{
     transform:translateY(-10px);
     transition:all 0.3s ease;
 }
+.menu-content{
+    display:none;
+}
 
-.menu-container:hover .menu-content{
+.menu-content.active{
     display:block;
     opacity:1;
     transform:translateY(0);
 }
-
 .menu-content a{
     display:block;
     padding:12px;
@@ -518,11 +520,12 @@ nav ul{
     transform:translateX(-10px);
     transition:all 0.3s ease;
 }
+    .submenu-content{
+    display:none;
+}
 
-.submenu:hover .submenu-content{
+.submenu-content.active{
     display:block;
-    opacity:1;
-    transform:translateX(0);
 }
 </style>
 
@@ -530,7 +533,7 @@ nav ul{
 <body>
     <div class="menu-container">
 
-    <button class="menu-btn">☰</button>
+<button class="menu-btn" id="menuBtn">☰</button>
 
     <div class="menu-content">
 
@@ -782,5 +785,20 @@ setInterval(changeText, 3000);
    target="_blank">
    <i class="fab fa-whatsapp"></i>
 </a>
+    <script>
+const menuBtn = document.getElementById("menuBtn");
+const menuContent = document.querySelector(".menu-content");
+
+menuBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    menuContent.classList.toggle("active");
+});
+
+document.addEventListener("click", function(e){
+    if(!menuContent.contains(e.target) && e.target !== menuBtn){
+        menuContent.classList.remove("active");
+    }
+});
+</script>
 </body>
 </html>
