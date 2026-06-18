@@ -1,19 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Soil Mechanics</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soil Mechanics</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#0a1931,#1f4068);
+color:white;
+min-height:100vh;
+}
+
+.header{
+text-align:center;
+padding:60px 20px;
+}
+
+.header h1{
+font-size:60px;
+margin-bottom:15px;
+}
+
+.header p{
+font-size:20px;
+opacity:.8;
+}
+
+.resources{
+max-width:900px;
+margin:auto;
+padding:30px;
+}
+
+.resources h2{
+margin-bottom:20px;
+}
+
+.resource-btn{
+display:block;
+background:#2563eb;
+padding:15px 20px;
+margin:15px 0;
+border-radius:12px;
+text-decoration:none;
+color:white;
+font-size:18px;
+transition:.3s;
+}
+
+.resource-btn:hover{
+transform:translateX(10px);
+background:#3b82f6;
+}
+
+.back-btn{
+display:inline-block;
+margin:30px;
+padding:12px 20px;
+background:white;
+color:#0a1931;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+}
+
+</style>
+
 </head>
+
 <body>
 
+<a href="index.html" class="back-btn">← Back</a>
+
+<div class="header">
 <h1>Soil Mechanics</h1>
+<p>Lecture Notes, Chapters, Assignments & Lab Reports</p>
+</div>
 
-<a href="Chapter-1.pdf" target="_blank">Chapter 1</a><br><br>
+<div class="resources">
 
-<a href="Chapter-2.pdf" target="_blank">Chapter 2</a><br><br>
+<h2>Chapters</h2>
 
-<a href="#">Assignments</a><br><br>
+<a href="Chapter-1.pdf" target="_blank" class="resource-btn">
+📘 Chapter 1
+</a>
 
-<a href="#">Lab Reports</a>
+<a href="Chapter-2.pdf" target="_blank" class="resource-btn">
+📘 Chapter 2
+</a>
+
+<a href="#" class="resource-btn">
+📘 Chapter 3 (Coming Soon)
+</a>
+
+<h2>Assignments</h2>
+
+<a href="#" class="resource-btn">
+📝 Assignment 1
+</a>
+
+<h2>Lab Reports</h2>
+
+<a href="#" class="resource-btn">
+🔬 Lab Report 1
+</a>
+
+</div>
 
 </body>
 </html>
