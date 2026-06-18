@@ -558,7 +558,17 @@ footer {
     </div>
   </div>
 </div>
+<div class="submenu" id="researchSubmenu">
+    <a href="#" id="researchToggle">Research & Projects ▼</a>
 
+    <div class="submenu-content" id="researchContent">
+        <a href="coming-soon.html">Research Papers</a>
+        <a href="coming-soon.html">Course Projects</a>
+        <a href="coming-soon.html">SAP2000 Projects</a>
+        <a href="coming-soon.html">ETABS Projects</a>
+        <a href="coming-soon.html">Final Year Thesis</a>
+    </div>
+</div>
 <nav>
   <a href="index.html" class="logo">ABDULLAH</a>
 
@@ -741,7 +751,9 @@ const menuBtn = document.getElementById("menuBtn");
 const menuContent = document.getElementById("menuContent");
 const submenuToggle = document.getElementById("submenuToggle");
 const submenuContent = document.getElementById("submenuContent");
-
+const researchToggle = document.getElementById("researchToggle");
+const researchContent = document.getElementById("researchContent");
+   
 menuBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   menuContent.classList.toggle("active");
@@ -754,12 +766,18 @@ submenuToggle.addEventListener("click", (e) => {
   e.stopPropagation();
   submenuContent.classList.toggle("active");
 });
-
+researchToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    researchContent.classList.toggle("active");
+});
+   
 document.addEventListener("click", (e) => {
   const clickedInsideMenu = menuContent.contains(e.target) || e.target === menuBtn;
   if (!clickedInsideMenu) {
     menuContent.classList.remove("active");
     submenuContent.classList.remove("active");
+     researchContent.classList.remove("active");
   }
 });
 </script>
