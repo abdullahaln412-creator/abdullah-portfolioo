@@ -152,21 +152,23 @@ nav a {
 .submenu-content {
   display: none;
   position: absolute;
-  left: 220px;
-  top: 0;
+ left: 0;
+top: 100%;
+margin-top: 8px;
+width: 330px;
   background: linear-gradient(135deg, #185adb, #0a1931);
   min-width: 220px;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateY(-10px);
   transition: all 0.3s ease;
 }
 
 .submenu-content.active {
   display: block;
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 /* ============================
@@ -505,7 +507,7 @@ footer {
 
   <div class="menu-content" id="menuContent">
     <div class="submenu" id="academicSubmenu">
-      <a href="#" id="submenuToggle">Academic Resources ▸</a>
+    <a href="#" id="submenuToggle">Academic Resources ▼</a>
 
       <div class="submenu-content" id="submenuContent">
         <a href="c-programming.html">C Programming</a>
