@@ -765,6 +765,126 @@ footer {
   line-height: 1;
 }
 
+/* ============================
+   ADMIN UPLOAD PANEL
+   ============================ */
+.admin-panel {
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 24px;
+}
+
+.token-gate {
+  display: flex;
+  justify-content: center;
+}
+
+.token-gate-inner,
+.upload-panel-inner {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(96,165,250,0.2);
+  border-radius: 16px;
+  padding: 28px 32px;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.upload-panel-inner {
+  max-width: 100%;
+  text-align: left;
+}
+
+.token-gate-inner input[type="password"],
+#ghTokenInput {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(96,165,250,0.4);
+  background: rgba(255,255,255,0.06);
+  color: white;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  outline: none;
+  font-family: monospace;
+}
+
+#ghTokenInput::placeholder { color: #475569; }
+
+#tokenSubmitBtn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 0.92rem;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s;
+  margin-bottom: 10px;
+}
+
+#tokenSubmitBtn:hover { background: #1d4ed8; }
+
+.token-hint {
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.token-hint a { color: #60a5fa; }
+
+/* Upload queue items */
+.queue-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.queue-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.queue-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.queue-name {
+  color: #e2e8f0;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.queue-size {
+  color: #64748b;
+  font-size: 0.78rem;
+  margin-top: 2px;
+}
+
+.queue-status {
+  font-size: 0.82rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.queue-status.pending  { background: rgba(100,116,139,0.3); color: #94a3b8; }
+.queue-status.uploading{ background: rgba(37,99,235,0.3);   color: #60a5fa; }
+.queue-status.done     { background: rgba(34,197,94,0.2);   color: #4ade80; }
+.queue-status.error    { background: rgba(220,38,38,0.2);   color: #f87171; }
+
 </style>
 </head>
 <body>
@@ -963,14 +1083,53 @@ footer {
     <button class="memory-close-btn" id="memoryCloseBtn">✕ Close</button>
   </div>
 
-  <label class="memory-upload-area" for="photoUploadInput">
-    <div class="upload-icon">📷</div>
-    <p><strong>Click to upload photos</strong><br>or drag &amp; drop here<br><span style="font-size:0.8rem; color:#64748b;">JPG, PNG, WEBP supported</span></p>
-    <input type="file" id="photoUploadInput" accept="image/*" multiple>
-  </label>
+  <!-- Admin Upload Panel (only visible after token is entered) -->
+  <div class="admin-panel" id="adminPanel">
 
+    <!-- Step 1: Token gate -->
+    <div class="token-gate" id="tokenGate">
+      <div class="token-gate-inner">
+        <div style="font-size:32px; margin-bottom:10px;">🔐</div>
+        <h3 style="color:#60a5fa; margin-bottom:8px;">Admin Upload</h3>
+        <p style="color:#94a3b8; font-size:0.88rem; margin-bottom:16px;">Enter your GitHub Personal Access Token to upload photos directly to your repo.</p>
+        <input type="password" id="ghTokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
+        <button id="tokenSubmitBtn">Unlock Upload Panel</button>
+        <p class="token-hint">Token needs <strong>repo</strong> scope. <a href="https://github.com/settings/tokens/new?scopes=repo&description=Memory+Gallery+Upload" target="_blank" rel="noopener">Create one here ↗</a></p>
+      </div>
+    </div>
+
+    <!-- Step 2: Upload panel (shown after token unlocked) -->
+    <div class="upload-panel" id="uploadPanel" style="display:none;">
+      <div class="upload-panel-inner">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+          <span style="color:#4ade80; font-size:0.9rem;">✅ Admin unlocked</span>
+          <button id="lockBtn" style="background:rgba(255,255,255,0.08); color:#94a3b8; border:1px solid rgba(255,255,255,0.15); padding:5px 14px; border-radius:6px; cursor:pointer; font-size:0.82rem;">🔒 Lock</button>
+        </div>
+
+        <label class="memory-upload-area" for="photoUploadInput" id="dropZone">
+          <div class="upload-icon">📷</div>
+          <p><strong>Click to choose photos</strong><br>or drag &amp; drop here<br><span style="font-size:0.8rem; color:#64748b;">JPG, PNG, WEBP — multiple allowed</span></p>
+          <input type="file" id="photoUploadInput" accept="image/jpeg,image/png,image/webp,image/gif" multiple>
+        </label>
+
+        <!-- Upload queue -->
+        <div id="uploadQueue" style="display:none; width:100%; max-width:600px; margin-top:12px;"></div>
+
+        <button id="uploadAllBtn" style="display:none; margin-top:12px; background:#2563eb; color:white; border:none; padding:11px 28px; border-radius:8px; font-size:0.95rem; cursor:pointer; transition:all 0.3s;">
+          ⬆️ Upload All to GitHub
+        </button>
+
+        <div id="uploadStatus" style="margin-top:10px; font-size:0.88rem; color:#94a3b8;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery display -->
   <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-empty" id="galleryEmpty">No photos yet. Upload your memories above! 🌟</div>
+    <div class="gallery-empty" id="galleryEmpty">
+      <div style="font-size:40px; margin-bottom:12px;">🌟</div>
+      Loading your memories...
+    </div>
   </div>
 </div>
 
@@ -1091,102 +1250,267 @@ notUploadedOverlay.addEventListener("click", (e) => {
 });
 
 /* ============================
-   MEMORY GALLERY
+   MEMORY GALLERY — GitHub API
    ============================ */
-const memoryToggle = document.getElementById("memoryToggle");
-const memoryOverlay = document.getElementById("memoryOverlay");
+const GITHUB_USER   = "abdullahaln412-creator";
+const GITHUB_REPO   = "abdullah-portfolioo";
+const GITHUB_FOLDER = "memories";
+const RAW_BASE      = `https://raw.githubusercontent.com/${GITHUB_USER}/${GITHUB_REPO}/main/${GITHUB_FOLDER}/`;
+const API_BASE      = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}`;
+
+const memoryToggle   = document.getElementById("memoryToggle");
+const memoryOverlay  = document.getElementById("memoryOverlay");
 const memoryCloseBtn = document.getElementById("memoryCloseBtn");
-const photoUploadInput = document.getElementById("photoUploadInput");
-const galleryGrid = document.getElementById("galleryGrid");
-const galleryEmpty = document.getElementById("galleryEmpty");
+const galleryGrid    = document.getElementById("galleryGrid");
+const galleryEmpty   = document.getElementById("galleryEmpty");
 
-// In-memory photo store (array of data URLs)
-let photos = [];
+// Token state (session only — never stored in localStorage)
+let ghToken = null;
 
+// ── Open gallery ──────────────────────────────────────────
 memoryToggle.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
   menuContent.classList.remove("active");
   memoryOverlay.classList.add("active");
+  loadGallery();
 });
 
 memoryCloseBtn.addEventListener("click", () => {
   memoryOverlay.classList.remove("active");
 });
 
-// Drag and drop support
-const uploadArea = document.querySelector(".memory-upload-area");
-uploadArea.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  uploadArea.style.borderColor = "#60a5fa";
-});
-uploadArea.addEventListener("dragleave", () => {
-  uploadArea.style.borderColor = "";
-});
-uploadArea.addEventListener("drop", (e) => {
-  e.preventDefault();
-  uploadArea.style.borderColor = "";
-  handleFiles(Array.from(e.dataTransfer.files));
+// ── Load photos from GitHub ───────────────────────────────
+async function loadGallery() {
+  galleryEmpty.style.display = "block";
+  galleryEmpty.innerHTML = `<div style="font-size:36px; margin-bottom:10px;">⏳</div>Loading memories…`;
+  Array.from(galleryGrid.querySelectorAll(".gallery-item")).forEach(el => el.remove());
+
+  try {
+    const res  = await fetch(API_BASE);
+    const data = await res.json();
+
+    if (!Array.isArray(data) || data.length === 0) {
+      galleryEmpty.innerHTML = `<div style="font-size:40px;margin-bottom:12px;">🌟</div>No memories yet — upload your first photo above!`;
+      return;
+    }
+
+    const images = data.filter(f => /\.(jpe?g|png|webp|gif)$/i.test(f.name));
+
+    if (images.length === 0) {
+      galleryEmpty.innerHTML = `<div style="font-size:40px;margin-bottom:12px;">🌟</div>No photos found in the memories folder yet.`;
+      return;
+    }
+
+    galleryEmpty.style.display = "none";
+    images.forEach(file => addGalleryCard(RAW_BASE + file.name, file.name));
+
+  } catch (err) {
+    galleryEmpty.innerHTML = `<div style="font-size:36px;margin-bottom:10px;">⚠️</div>Could not load gallery. Check your internet connection.`;
+    console.error(err);
+  }
+}
+
+function addGalleryCard(src, name) {
+  const item = document.createElement("div");
+  item.className = "gallery-item";
+
+  const img = document.createElement("img");
+  img.src   = src;
+  img.alt   = name;
+  img.loading = "lazy";
+  img.addEventListener("click", () => openLightbox(src));
+
+  item.appendChild(img);
+  galleryGrid.appendChild(item);
+}
+
+// ── Token gate ────────────────────────────────────────────
+document.getElementById("tokenSubmitBtn").addEventListener("click", () => {
+  const val = document.getElementById("ghTokenInput").value.trim();
+  if (!val) { showStatus("Please paste your GitHub token.", "error"); return; }
+  ghToken = val;
+  document.getElementById("tokenGate").style.display   = "none";
+  document.getElementById("uploadPanel").style.display = "block";
 });
 
+document.getElementById("ghTokenInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") document.getElementById("tokenSubmitBtn").click();
+});
+
+document.getElementById("lockBtn").addEventListener("click", () => {
+  ghToken = null;
+  document.getElementById("ghTokenInput").value = "";
+  document.getElementById("uploadPanel").style.display = "none";
+  document.getElementById("tokenGate").style.display   = "flex";
+  document.getElementById("uploadQueue").style.display = "none";
+  document.getElementById("uploadAllBtn").style.display = "none";
+  document.getElementById("uploadQueue").innerHTML = "";
+  pendingFiles = [];
+});
+
+// ── File picking & queue ──────────────────────────────────
+let pendingFiles = [];
+
+const photoUploadInput = document.getElementById("photoUploadInput");
+const dropZone         = document.getElementById("dropZone");
+const uploadQueue      = document.getElementById("uploadQueue");
+const uploadAllBtn     = document.getElementById("uploadAllBtn");
+
 photoUploadInput.addEventListener("change", (e) => {
-  handleFiles(Array.from(e.target.files));
+  addToQueue(Array.from(e.target.files));
   photoUploadInput.value = "";
 });
 
-function handleFiles(files) {
-  files.filter(f => f.type.startsWith("image/")).forEach(file => {
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  dropZone.style.borderColor = "#60a5fa";
+});
+dropZone.addEventListener("dragleave", () => {
+  dropZone.style.borderColor = "";
+});
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropZone.style.borderColor = "";
+  addToQueue(Array.from(e.dataTransfer.files).filter(f => f.type.startsWith("image/")));
+});
+
+function addToQueue(files) {
+  files.forEach(file => {
+    if (!file.type.startsWith("image/")) return;
+    pendingFiles.push(file);
+    const idx = pendingFiles.length - 1;
+
+    const item = document.createElement("div");
+    item.className = "queue-item";
+    item.id = `qitem-${idx}`;
+
+    const thumb = document.createElement("img");
+    thumb.className = "queue-thumb";
+    thumb.src = URL.createObjectURL(file);
+
+    const info = document.createElement("div");
+    info.className = "queue-info";
+    info.innerHTML = `<div class="queue-name">${file.name}</div>
+                      <div class="queue-size">${(file.size/1024).toFixed(1)} KB</div>`;
+
+    const badge = document.createElement("span");
+    badge.className = "queue-status pending";
+    badge.id = `qstatus-${idx}`;
+    badge.textContent = "Pending";
+
+    item.appendChild(thumb);
+    item.appendChild(info);
+    item.appendChild(badge);
+    uploadQueue.appendChild(item);
+  });
+
+  if (pendingFiles.length > 0) {
+    uploadQueue.style.display  = "block";
+    uploadAllBtn.style.display = "block";
+  }
+}
+
+// ── Upload to GitHub ──────────────────────────────────────
+uploadAllBtn.addEventListener("click", async () => {
+  if (!ghToken) { showStatus("Token missing — please lock and re-enter.", "error"); return; }
+  if (pendingFiles.length === 0) return;
+
+  uploadAllBtn.disabled    = true;
+  uploadAllBtn.textContent = "⬆️ Uploading…";
+
+  let successCount = 0;
+
+  for (let i = 0; i < pendingFiles.length; i++) {
+    const file   = pendingFiles[i];
+    const badge  = document.getElementById(`qstatus-${i}`);
+    if (!badge) continue;
+    if (badge.classList.contains("done")) continue;  // already uploaded
+
+    badge.className   = "queue-status uploading";
+    badge.textContent = "Uploading…";
+
+    try {
+      // Unique filename: timestamp + original name (sanitised)
+      const safeName  = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+      const fileName  = `${Date.now()}_${safeName}`;
+      const base64    = await fileToBase64(file);
+
+      const apiUrl = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FOLDER}/${fileName}`;
+
+      const res = await fetch(apiUrl, {
+        method: "PUT",
+        headers: {
+          "Authorization": `token ${ghToken}`,
+          "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+          message: `Add memory photo: ${fileName}`,
+          content : base64
+        })
+      });
+
+      if (res.ok) {
+        badge.className   = "queue-status done";
+        badge.textContent = "✅ Done";
+        successCount++;
+        // Add to visible gallery immediately
+        addGalleryCard(RAW_BASE + fileName, fileName);
+        if (galleryEmpty.style.display !== "none") galleryEmpty.style.display = "none";
+      } else {
+        const err = await res.json();
+        badge.className   = "queue-status error";
+        badge.textContent = "❌ Failed";
+        console.error("GitHub API error:", err);
+        if (err.message && err.message.includes("Bad credentials")) {
+          showStatus("❌ Invalid token. Please lock and enter a valid token.", "error");
+          break;
+        }
+      }
+    } catch (err) {
+      badge.className   = "queue-status error";
+      badge.textContent = "❌ Error";
+      console.error(err);
+    }
+  }
+
+  uploadAllBtn.disabled    = false;
+  uploadAllBtn.textContent = "⬆️ Upload All to GitHub";
+
+  if (successCount > 0) {
+    showStatus(`✅ ${successCount} photo${successCount > 1 ? "s" : ""} uploaded successfully!`, "success");
+    pendingFiles = [];
+    setTimeout(() => {
+      uploadQueue.innerHTML      = "";
+      uploadQueue.style.display  = "none";
+      uploadAllBtn.style.display = "none";
+      document.getElementById("uploadStatus").textContent = "";
+    }, 3500);
+  }
+});
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onload = (ev) => {
-      photos.push(ev.target.result);
-      renderGallery();
-    };
+    reader.onload  = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = reject;
     reader.readAsDataURL(file);
   });
 }
 
-function renderGallery() {
-  // Remove old photo items (keep empty message node)
-  Array.from(galleryGrid.querySelectorAll(".gallery-item")).forEach(el => el.remove());
-
-  if (photos.length === 0) {
-    galleryEmpty.style.display = "block";
-    return;
-  }
-
-  galleryEmpty.style.display = "none";
-
-  photos.forEach((src, index) => {
-    const item = document.createElement("div");
-    item.className = "gallery-item";
-
-    const img = document.createElement("img");
-    img.src = src;
-    img.alt = "Memory " + (index + 1);
-    img.addEventListener("click", () => openLightbox(src));
-
-    const del = document.createElement("button");
-    del.className = "delete-btn";
-    del.innerHTML = "✕";
-    del.title = "Remove photo";
-    del.addEventListener("click", (e) => {
-      e.stopPropagation();
-      photos.splice(index, 1);
-      renderGallery();
-    });
-
-    item.appendChild(img);
-    item.appendChild(del);
-    galleryGrid.appendChild(item);
-  });
+function showStatus(msg, type) {
+  const el = document.getElementById("uploadStatus");
+  el.textContent  = msg;
+  el.style.color  = type === "error" ? "#f87171" : "#4ade80";
+  setTimeout(() => { el.textContent = ""; }, 4000);
 }
 
 /* ============================
    LIGHTBOX
    ============================ */
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightboxImg");
-const lightboxClose = document.getElementById("lightboxClose");
+const lightbox     = document.getElementById("lightbox");
+const lightboxImg  = document.getElementById("lightboxImg");
+const lightboxClose= document.getElementById("lightboxClose");
 
 function openLightbox(src) {
   lightboxImg.src = src;
@@ -1198,7 +1522,7 @@ lightbox.addEventListener("click", (e) => {
   if (e.target === lightbox) lightbox.classList.remove("active");
 });
 
-// Close lightbox with Escape key
+// Close everything with Escape
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     lightbox.classList.remove("active");
