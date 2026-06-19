@@ -512,6 +512,259 @@ footer {
     }
 }
 
+/* ============================
+   NOT UPLOADED OVERLAY
+   ============================ */
+.not-uploaded-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 999999;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.not-uploaded-overlay.active {
+  display: flex;
+}
+
+.not-uploaded-box {
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  color: white;
+  padding: 40px 50px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  border: 1px solid rgba(96, 165, 250, 0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  0%   { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+.not-uploaded-box .icon {
+  font-size: 52px;
+  margin-bottom: 16px;
+}
+
+.not-uploaded-box h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #60a5fa;
+}
+
+.not-uploaded-box p {
+  color: #94a3b8;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.not-uploaded-close {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.not-uploaded-close:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+}
+
+/* ============================
+   MEMORY GALLERY OVERLAY
+   ============================ */
+.memory-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 999998;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding: 30px 20px 60px;
+}
+
+.memory-overlay.active {
+  display: flex;
+}
+
+.memory-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1000px;
+  margin-bottom: 30px;
+}
+
+.memory-header h2 {
+  color: white;
+  font-size: 2rem;
+  font-family: "Poppins", sans-serif;
+}
+
+.memory-header h2 span {
+  color: #60a5fa;
+}
+
+.memory-close-btn {
+  background: rgba(255,255,255,0.1);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 8px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.memory-close-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.memory-upload-area {
+  width: 100%;
+  max-width: 1000px;
+  border: 2px dashed rgba(96, 165, 250, 0.5);
+  border-radius: 16px;
+  padding: 32px 20px;
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.03);
+}
+
+.memory-upload-area:hover {
+  border-color: #60a5fa;
+  background: rgba(96, 165, 250, 0.05);
+  color: #60a5fa;
+}
+
+.memory-upload-area .upload-icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.memory-upload-area p {
+  font-size: 0.95rem;
+}
+
+.memory-upload-area input[type="file"] {
+  display: none;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  background: #1e293b;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.03);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-item .delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(220, 38, 38, 0.85);
+  color: white;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.gallery-item:hover .delete-btn {
+  display: flex;
+}
+
+.gallery-empty {
+  color: #64748b;
+  text-align: center;
+  padding: 40px;
+  font-size: 1rem;
+  grid-column: 1 / -1;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 28px;
+  color: white;
+  font-size: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  line-height: 1;
+}
+
 </style>
 </head>
 <body>
@@ -525,55 +778,39 @@ footer {
     <a href="#" id="submenuToggle">Academic Resources ▼</a>
 
       <div class="submenu-content" id="submenuContent">
-        <a href="c-programming.html">C Programming</a>
-         
-<a href="physics/Physics.html">Physics</a>
-
-<a href="engineering-materials.html">Engineering Materials</a>
-
-<a href="engineering-mechanics.html">Engineering Mechanics</a>
-
-<a href="engineering-surveying.html">Engineering Surveying</a>
-
-<a href="linear-algebra.html">Linear Algebra</a>
-
-<a href="design-principle.html">Design Principle</a>
-
-<a href="architecture.html">Architecture</a>
-
-<a href="economics-management.html">Economics & Management</a>
-
-<a href="engineering-geology.html">Engineering Geology</a>
-
-<a href="structural-mechanics.html">Structural Mechanics</a>
-
-<a href="concrete-design-principle.html">Concrete Design Principle</a>
-
-<a href="anti-seismic-design.html">Design Principle of Anti-Seismic Engineering</a>
-
-<a href="fluid-mechanics.html">Fluid Mechanics</a>
-
-<a href="soil-mechanics.html">Soil Mechanics</a>
-
-<a href="steel-structure-design.html">Steel Structure Design</a>
-
-<a href="design-of-concrete.html">Design of Concrete</a>
-
-<a href="steel-structure-design-2.html">Steel Structure Design 2</a>
-         </div>
-</div>
-         <div class="submenu">
-    <a href="#" id="researchToggle">Research & Projects ▼</a>
-
-    <div class="submenu-content" id="researchContent">
-        <a href="coming-soon.html">Research Papers</a>
-        <a href="coming-soon.html">Course Projects</a>
-        <a href="coming-soon.html">SAP2000 Projects</a>
-        <a href="coming-soon.html">ETABS Projects</a>
-        <a href="coming-soon.html">Final Year Thesis</a>
-    </div>
+        <a href="#" class="subject-link">C Programming</a>
+<a href="#" class="subject-link">Physics</a>
+<a href="#" class="subject-link">Engineering Materials</a>
+<a href="#" class="subject-link">Engineering Mechanics</a>
+<a href="#" class="subject-link">Engineering Surveying</a>
+<a href="#" class="subject-link">Linear Algebra</a>
+<a href="#" class="subject-link">Design Principle</a>
+<a href="#" class="subject-link">Architecture</a>
+<a href="#" class="subject-link">Economics &amp; Management</a>
+<a href="#" class="subject-link">Engineering Geology</a>
+<a href="#" class="subject-link">Structural Mechanics</a>
+<a href="#" class="subject-link">Concrete Design Principle</a>
+<a href="#" class="subject-link">Design Principle of Anti-Seismic Engineering</a>
+<a href="#" class="subject-link">Fluid Mechanics</a>
+<a href="#" class="subject-link">Soil Mechanics</a>
+<a href="#" class="subject-link">Steel Structure Design</a>
+<a href="#" class="subject-link">Design of Concrete</a>
+<a href="#" class="subject-link">Steel Structure Design 2</a>
       </div>
     </div>
+
+    <div class="submenu">
+      <a href="#" id="researchToggle">Research &amp; Projects ▼</a>
+      <div class="submenu-content" id="researchContent">
+        <a href="#" class="subject-link">Research Papers</a>
+        <a href="#" class="subject-link">Course Projects</a>
+        <a href="#" class="subject-link">SAP2000 Projects</a>
+        <a href="#" class="subject-link">ETABS Projects</a>
+        <a href="#" class="subject-link">Final Year Thesis</a>
+      </div>
+    </div>
+
+    <a href="#" id="memoryToggle" style="border-top: 1px solid rgba(255,255,255,0.12); margin-top: 6px; padding-top: 14px;">📸 &nbsp;Memory</a>
   </div>
 </div>
 <nav>
@@ -709,6 +946,40 @@ footer {
   <i class="fab fa-whatsapp"></i>
 </a>
 
+<!-- "Not Uploaded Yet" overlay -->
+<div class="not-uploaded-overlay" id="notUploadedOverlay">
+  <div class="not-uploaded-box">
+    <div class="icon">📂</div>
+    <h3 id="notUploadedSubject">Resources Not Yet Available</h3>
+    <p>The resources for this subject haven't been uploaded yet.<br>Please check back later!</p>
+    <button class="not-uploaded-close" id="notUploadedClose">Got it</button>
+  </div>
+</div>
+
+<!-- Memory Gallery overlay -->
+<div class="memory-overlay" id="memoryOverlay">
+  <div class="memory-header">
+    <h2>📸 &nbsp;<span>Memory</span> Gallery</h2>
+    <button class="memory-close-btn" id="memoryCloseBtn">✕ Close</button>
+  </div>
+
+  <label class="memory-upload-area" for="photoUploadInput">
+    <div class="upload-icon">📷</div>
+    <p><strong>Click to upload photos</strong><br>or drag &amp; drop here<br><span style="font-size:0.8rem; color:#64748b;">JPG, PNG, WEBP supported</span></p>
+    <input type="file" id="photoUploadInput" accept="image/*" multiple>
+  </label>
+
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-empty" id="galleryEmpty">No photos yet. Upload your memories above! 🌟</div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">✕</button>
+  <img id="lightboxImg" src="" alt="Memory photo">
+</div>
+
 <script>
 /* ============================
    SCROLL REVEAL
@@ -764,7 +1035,6 @@ const researchContent = document.getElementById("researchContent");
 menuBtn.addEventListener("click", (e) => {
   e.stopPropagation();
   menuContent.classList.toggle("active");
-  // Close submenu whenever the main menu is toggled shut/open fresh
   submenuContent.classList.remove("active");
   researchContent.classList.remove("active");
 });
@@ -775,11 +1045,12 @@ submenuToggle.addEventListener("click", (e) => {
   submenuContent.classList.toggle("active");
   researchContent.classList.remove("active");
 });
+
 researchToggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    researchContent.classList.toggle("active");
-    submenuContent.classList.remove("active");
+  e.preventDefault();
+  e.stopPropagation();
+  researchContent.classList.toggle("active");
+  submenuContent.classList.remove("active");
 });
    
 document.addEventListener("click", (e) => {
@@ -787,7 +1058,152 @@ document.addEventListener("click", (e) => {
   if (!clickedInsideMenu) {
     menuContent.classList.remove("active");
     submenuContent.classList.remove("active");
-     researchContent.classList.remove("active");
+    researchContent.classList.remove("active");
+  }
+});
+
+/* ============================
+   "NOT UPLOADED YET" INTERCEPTION
+   ============================ */
+const notUploadedOverlay = document.getElementById("notUploadedOverlay");
+const notUploadedSubject = document.getElementById("notUploadedSubject");
+const notUploadedClose = document.getElementById("notUploadedClose");
+
+document.querySelectorAll(".subject-link").forEach((link) => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const subjectName = link.textContent.trim();
+    notUploadedSubject.textContent = subjectName + " — Coming Soon";
+    notUploadedOverlay.classList.add("active");
+    menuContent.classList.remove("active");
+    submenuContent.classList.remove("active");
+    researchContent.classList.remove("active");
+  });
+});
+
+notUploadedClose.addEventListener("click", () => {
+  notUploadedOverlay.classList.remove("active");
+});
+
+notUploadedOverlay.addEventListener("click", (e) => {
+  if (e.target === notUploadedOverlay) notUploadedOverlay.classList.remove("active");
+});
+
+/* ============================
+   MEMORY GALLERY
+   ============================ */
+const memoryToggle = document.getElementById("memoryToggle");
+const memoryOverlay = document.getElementById("memoryOverlay");
+const memoryCloseBtn = document.getElementById("memoryCloseBtn");
+const photoUploadInput = document.getElementById("photoUploadInput");
+const galleryGrid = document.getElementById("galleryGrid");
+const galleryEmpty = document.getElementById("galleryEmpty");
+
+// In-memory photo store (array of data URLs)
+let photos = [];
+
+memoryToggle.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  menuContent.classList.remove("active");
+  memoryOverlay.classList.add("active");
+});
+
+memoryCloseBtn.addEventListener("click", () => {
+  memoryOverlay.classList.remove("active");
+});
+
+// Drag and drop support
+const uploadArea = document.querySelector(".memory-upload-area");
+uploadArea.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  uploadArea.style.borderColor = "#60a5fa";
+});
+uploadArea.addEventListener("dragleave", () => {
+  uploadArea.style.borderColor = "";
+});
+uploadArea.addEventListener("drop", (e) => {
+  e.preventDefault();
+  uploadArea.style.borderColor = "";
+  handleFiles(Array.from(e.dataTransfer.files));
+});
+
+photoUploadInput.addEventListener("change", (e) => {
+  handleFiles(Array.from(e.target.files));
+  photoUploadInput.value = "";
+});
+
+function handleFiles(files) {
+  files.filter(f => f.type.startsWith("image/")).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      photos.push(ev.target.result);
+      renderGallery();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderGallery() {
+  // Remove old photo items (keep empty message node)
+  Array.from(galleryGrid.querySelectorAll(".gallery-item")).forEach(el => el.remove());
+
+  if (photos.length === 0) {
+    galleryEmpty.style.display = "block";
+    return;
+  }
+
+  galleryEmpty.style.display = "none";
+
+  photos.forEach((src, index) => {
+    const item = document.createElement("div");
+    item.className = "gallery-item";
+
+    const img = document.createElement("img");
+    img.src = src;
+    img.alt = "Memory " + (index + 1);
+    img.addEventListener("click", () => openLightbox(src));
+
+    const del = document.createElement("button");
+    del.className = "delete-btn";
+    del.innerHTML = "✕";
+    del.title = "Remove photo";
+    del.addEventListener("click", (e) => {
+      e.stopPropagation();
+      photos.splice(index, 1);
+      renderGallery();
+    });
+
+    item.appendChild(img);
+    item.appendChild(del);
+    galleryGrid.appendChild(item);
+  });
+}
+
+/* ============================
+   LIGHTBOX
+   ============================ */
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+const lightboxClose = document.getElementById("lightboxClose");
+
+function openLightbox(src) {
+  lightboxImg.src = src;
+  lightbox.classList.add("active");
+}
+
+lightboxClose.addEventListener("click", () => lightbox.classList.remove("active"));
+lightbox.addEventListener("click", (e) => {
+  if (e.target === lightbox) lightbox.classList.remove("active");
+});
+
+// Close lightbox with Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    lightbox.classList.remove("active");
+    notUploadedOverlay.classList.remove("active");
+    memoryOverlay.classList.remove("active");
   }
 });
 </script>
