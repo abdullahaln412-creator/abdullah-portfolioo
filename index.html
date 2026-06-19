@@ -116,8 +116,11 @@ nav a {
 .menu-content {
   display: none;
   position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
   background: linear-gradient(135deg, #0a1931, #185adb);
   min-width: 220px;
+  max-width: min(330px, calc(100vw - 32px));
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   opacity: 0;
@@ -151,23 +154,21 @@ nav a {
 
 .submenu-content {
   display: none;
-  position: absolute;
- left: 0;
-top: 100%;
-margin-top: 8px;
-width: 90vw;
-max-width: 330px;
+  position: static;
+  margin: 8px 8px 10px;
+  width: auto;
+  max-width: none;
   background: linear-gradient(135deg, #185adb, #0a1931);
-  min-width: 220px;
+  min-width: 0;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-   z-index: 1000;
+  z-index: 1000;
   opacity: 0;
   transform: translateY(-10px);
   transition: all 0.3s ease;
-   max-height: 70vh;
-overflow-y: auto;
--webkit-overflow-scrolling: touch;
+  max-height: 55vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .submenu-content.active {
@@ -505,6 +506,10 @@ footer {
     .menu-container {
         left: 8px;
     }
+
+    .menu-content {
+        max-width: calc(100vw - 16px);
+    }
 }
 
 </style>
@@ -761,17 +766,20 @@ menuBtn.addEventListener("click", (e) => {
   menuContent.classList.toggle("active");
   // Close submenu whenever the main menu is toggled shut/open fresh
   submenuContent.classList.remove("active");
+  researchContent.classList.remove("active");
 });
 
 submenuToggle.addEventListener("click", (e) => {
   e.preventDefault();
   e.stopPropagation();
   submenuContent.classList.toggle("active");
+  researchContent.classList.remove("active");
 });
 researchToggle.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     researchContent.classList.toggle("active");
+    submenuContent.classList.remove("active");
 });
    
 document.addEventListener("click", (e) => {
