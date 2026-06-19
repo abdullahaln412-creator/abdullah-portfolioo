@@ -73,14 +73,21 @@ background:#3b82f6;
 }
 
 .back-btn{
-display:inline-block;
-margin:30px;
-padding:12px 20px;
-background:white;
-color:#0a1931;
-text-decoration:none;
-border-radius:10px;
-font-weight:bold;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    z-index: 1000;
+    transition: 0.3s;
+}
+
+.back-btn:hover{
+    background: #1d4ed8;
 }
 .resource-card{
 background:rgba(255,255,255,0.08);
